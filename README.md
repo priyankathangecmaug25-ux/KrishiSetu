@@ -12,7 +12,7 @@ This project is developed using modern technologies like ASP.NET Core, Spring Bo
 
 👷 Farm Worker Hiring & Availability Tracking
 
-🌐 Multi-language Support (English/Hindi/Marathi)
+🌐 Multi-language Support (English/Hindi)
 
 💳 Razorpay Payment Integration
 
@@ -23,28 +23,21 @@ This project is developed using modern technologies like ASP.NET Core, Spring Bo
 🗄️ MySQL Database for Data Storage
 
 🛠️ Tech Stack
+
 Frontend
-
 React.js
-
 React-i18next (Multi-language Support)
-
 Bootstrap / Tailwind CSS
 
 Backend
-
 ASP.NET Core Web API
 
 Spring Boot REST API
-
 JWT Authentication
 
 Database
-
 MySQL
 
 Tools & Services
-
 Razorpay Payment Gateway
-
 Git & GitHub for Version Control
