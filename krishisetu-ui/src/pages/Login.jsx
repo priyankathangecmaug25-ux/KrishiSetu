@@ -1,0 +1,137 @@
+import { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
+import { useNavigate, Link } from 'react-router-dom';
+import { Tractor, ArrowRight, Lock, Mail } from 'lucide-react';
+import LanguageToggle from '../components/LanguageToggle';
+import { useTranslation } from 'react-i18next';
+
+const Login = () => {
+    const { t } = useTranslation();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const { login } = useAuth();
+    const navigate = useNavigate();
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setError('');
+        try {
+            const userData = await login(email, password);
+            const roles = userData.roles;
+
+            // Route users based on their roles
+            if (roles.includes('ROLE_SUPER_ADMIN')) {
+                navigate('/superadmin');
+            } else if (roles.includes('ROLE_FARMER_SUBADMIN')) {
+                navigate('/farmer-subadmin');
+            } else if (roles.includes('ROLE_MACHINERY_OWNER_SUBADMIN')) {
+                navigate('/machinery-subadmin');
+            } else if (roles.includes('ROLE_WORKER_SUBADMIN')) {
+                navigate('/worker-subadmin');
+            } else if (roles.includes('ROLE_ADMIN')) {
+                navigate('/admin');
+            } else if (roles.includes('ROLE_FARMER')) {
+                navigate('/farmer');
+            } else if (roles.includes('ROLE_OWNER')) {
+                navigate('/owner');
+            } else if (roles.includes('ROLE_WORKER')) {
+                navigate('/worker');
+            } else if (roles.includes('ROLE_USER')) {
+                navigate('/farmer'); // Fallback
+            }
+        } catch (err) {
+            setError(err.response?.data?.message || t('login_failed'));
+        }
+    };
+
+    return (
+        <div className="min-h-screen flex bg-white font-inter">
+            {/* Visual Side */}
+            <div className="hidden lg:flex lg:w-1/2 bg-slate-900 border-r border-white/5 relative items-center justify-center p-20 overflow-hidden group">
+                <div className="absolute inset-0 opacity-20 pointer-events-none auth-bg-pattern"></div>
+                <div className="absolute top-0 right-0 p-10 grayscale opacity-20 group-hover:opacity-40 transition-opacity duration-1000 rotate-12">
+                    <Tractor size={300} />
+                </div>
+
+                <div className="relative z-10 max-w-md">
+                    <div className="bg-primary-600 w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-10 shadow-2xl shadow-primary-600/40">
+                        <Tractor size={32} />
+                    </div>
+                    <h2 className="text-6xl font-black font-outfit text-white tracking-tighter mb-8 leading-[0.9] italic uppercase">
+                        {t('rent_machinery_hero').split(' ')[0]} <br />
+                        <span className="not-italic text-primary-500">{t('rent_machinery_hero').split(' ')[1]}</span>
+                    </h2>
+                    <p className="text-slate-400 font-medium leading-relaxed">
+                        {t('login_hero_desc')}
+                    </p>
+                </div>
+            </div>
+
+            {/* Form Side */}
+            <div className="flex-1 flex items-center justify-center p-8 lg:p-24 relative overflow-hidden">
+                <LanguageToggle className="absolute top-6 right-6" />
+                <div className="w-full max-w-md relative z-10">
+                    <div className="mb-12">
+                        <h1 className="text-4xl font-black font-outfit text-slate-900 tracking-tighter uppercase italic leading-none mb-3">{t('login_welcome_back')}</h1>
+                        <p className="text-slate-500 font-bold uppercase tracking-widest text-xs">{t('login_subtitle')}</p>
+                    </div>
+
+                    {error && (
+                        <div className="bg-red-50 border border-red-100 text-red-600 p-4 rounded-2xl mb-8 text-xs font-bold uppercase tracking-widest flex items-center gap-3">
+                            <span className="w-2 h-2 rounded-full bg-red-600 animate-pulse"></span>
+                            {error}
+                        </div>
+                    )}
+
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                        <div className="space-y-2">
+                            <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">{t('email_address')}</label>
+                            <div className="relative group">
+                                <input
+                                    type="email"
+                                    required
+                                    className="input-field pl-14"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    placeholder="example@email.com"
+                                />
+                                <Mail className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary-600 transition-colors" size={20} />
+                            </div>
+                        </div>
+
+                        <div className="space-y-2">
+                            <div className="flex justify-between items-center ml-1">
+                                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{t('password')}</label>
+
+                            </div>
+                            <div className="relative group">
+                                <input
+                                    type="password"
+                                    required
+                                    className="input-field pl-14"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    placeholder="••••••••"
+                                />
+                                <Lock className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary-600 transition-colors" size={20} />
+                            </div>
+                        </div>
+
+                        <button type="submit" className="w-full h-16 bg-slate-900 text-white rounded-3xl font-bold text-sm uppercase tracking-widest shadow-2xl shadow-slate-900/30 hover:bg-slate-800 transition-all active:scale-95 flex items-center justify-center gap-3">
+                            {t('log_in_now')} <ArrowRight size={18} />
+                        </button>
+                    </form>
+
+                    <div className="mt-12 pt-12 border-t border-slate-100 text-center">
+                        <p className="text-sm font-bold text-slate-400 uppercase tracking-widest">
+                            {t('new_to_platform')} <Link to="/register" className="text-primary-600 font-bold hover:underline italic">{t('create_account')}</Link>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Login;

@@ -1,0 +1,199 @@
+import { useNavigate, NavLink } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import {
+    BarChart2,
+    Home,
+    User,
+    Search,
+    Briefcase,
+    Calendar,
+    LogOut,
+    Menu,
+    X,
+    ShieldCheck,
+    Tractor,
+    Settings,
+    Layout
+} from 'lucide-react';
+import { useState } from 'react';
+import LanguageToggle from '../components/LanguageToggle';
+import { useTranslation } from 'react-i18next';
+
+const DashboardShell = ({ children, title }) => {
+    const { user, logout } = useAuth();
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const navigate = useNavigate();
+    const { t } = useTranslation();
+
+    const farmerLinks = [
+        { name: t('home'), path: '/farmer', icon: <Layout size={20} /> },
+        { name: t('rent_machinery'), path: '#browse', icon: <Tractor size={20} /> },
+        { name: t('my_bookings'), path: '#bookings', icon: <Calendar size={20} /> },
+    ];
+
+    const ownerLinks = [
+        { name: t('my_machinery'), path: '#top', icon: <Tractor size={20} /> },
+        { name: t('booking_requests'), path: '#requests', icon: <Calendar size={20} /> },
+        { name: t('earnings'), path: '#earnings', icon: <BarChart2 size={20} /> },
+    ];
+
+    const workerLinks = [
+        { name: t('job_board'), path: '#board', icon: <Briefcase size={20} /> },
+        { name: t('work_history'), path: '#history', icon: <Calendar size={20} /> },
+    ];
+
+    const profileLink = { name: t('my_profile'), path: '/profile', icon: <User size={20} /> };
+
+    const superAdminLinks = [
+        { name: t('dashboard'), path: '/superadmin', icon: <BarChart2 size={20} /> },
+        { name: t('manage_sub_admins'), path: '/superadmin#admins', icon: <ShieldCheck size={20} /> },
+    ];
+
+    const farmerSubAdminLinks = [
+        { name: t('dashboard'), path: '/farmer-subadmin', icon: <BarChart2 size={20} /> },
+        { name: t('farmer_approvals'), path: '/farmer-subadmin#pending', icon: <User size={20} /> },
+    ];
+
+    const machinerySubAdminLinks = [
+        { name: t('dashboard'), path: '/machinery-subadmin', icon: <BarChart2 size={20} /> },
+        { name: t('owner_approvals'), path: '/machinery-subadmin#owners', icon: <User size={20} /> },
+        { name: t('machinery_approvals'), path: '/machinery-subadmin#listings', icon: <ShieldCheck size={20} /> },
+    ];
+
+    const workerSubAdminLinks = [
+        { name: t('dashboard'), path: '/worker-subadmin', icon: <BarChart2 size={20} /> },
+        { name: t('worker_approvals'), path: '/worker-subadmin#pending', icon: <User size={20} /> },
+    ];
+
+    const adminLinks = [
+        { name: t('system_overview'), path: '/admin', icon: <BarChart2 size={20} /> },
+        { name: t('user_list'), path: '/admin#users', icon: <User size={20} /> },
+        { name: t('approvals'), path: '/admin#approvals', icon: <ShieldCheck size={20} /> },
+    ];
+
+    const isSuperAdmin = user?.roles?.includes('ROLE_SUPER_ADMIN');
+    const isFarmerSubAdmin = user?.roles?.includes('ROLE_FARMER_SUBADMIN');
+    const isMachinerySubAdmin = user?.roles?.includes('ROLE_MACHINERY_OWNER_SUBADMIN');
+    const isWorkerSubAdmin = user?.roles?.includes('ROLE_WORKER_SUBADMIN');
+    const isAdmin = user?.roles?.includes('ROLE_ADMIN');
+    const isFarmer = user?.roles?.includes('ROLE_FARMER');
+    const isOwner = user?.roles?.includes('ROLE_OWNER');
+    const isWorker = user?.roles?.includes('ROLE_WORKER');
+
+    const links = (isSuperAdmin ? superAdminLinks :
+        isFarmerSubAdmin ? farmerSubAdminLinks :
+            isMachinerySubAdmin ? machinerySubAdminLinks :
+                isWorkerSubAdmin ? workerSubAdminLinks :
+                    isAdmin ? adminLinks :
+                        isFarmer ? farmerLinks :
+                            isOwner ? ownerLinks :
+                                workerLinks).concat([profileLink]);
+
+    return (
+        <div className="flex h-screen bg-slate-100 overflow-hidden font-inter">
+            {/* Mobile Backdrop */}
+            {isSidebarOpen && (
+                <div
+                    className="fixed inset-0 z-20 bg-slate-900/50 backdrop-blur-sm lg:hidden"
+                    onClick={() => setIsSidebarOpen(false)}
+                ></div>
+            )}
+
+            {/* Sidebar */}
+            <aside className={`
+        fixed inset-y-0 left-0 z-30 w-64 bg-slate-900 text-white transform transition-transform duration-300 ease-in-out lg:relative lg:translate-x-0
+        ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+      `}>
+                <div className="flex flex-col h-full">
+                    <div className="flex items-center justify-between px-6 py-8 border-b border-white/10">
+                        <div className="flex items-center gap-3">
+                            <div className="bg-primary-500 p-2 rounded-xl">
+                                <Tractor size={24} className="text-white" />
+                            </div>
+                            <span className="text-2xl font-black font-outfit tracking-tighter uppercase italic text-emerald-400">KrishiSetu</span>
+                        </div>
+                        <button className="lg:hidden" onClick={() => setIsSidebarOpen(false)}>
+                            <X size={20} />
+                        </button>
+                    </div>
+
+                    <nav className="flex-1 px-4 py-6 space-y-1">
+                        {links.map((link) => (
+                            <NavLink
+                                key={link.name}
+                                to={link.path}
+                                className={({ isActive }) => `
+                  flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group
+                  ${isActive ? 'bg-primary-600 text-white shadow-lg shadow-primary-900/40' : 'text-slate-400 hover:bg-white/5 hover:text-white'}
+                `}
+                            >
+                                <span className="group-hover:scale-110 transition-transform">{link.icon}</span>
+                                <span className="font-bold">{link.name}</span>
+                            </NavLink>
+                        ))}
+                    </nav>
+
+                    <div className="px-4 py-6 border-t border-white/10 space-y-4">
+                        <div className="flex items-center gap-3 px-4 py-2">
+                            <div className="w-10 h-10 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center font-bold text-lg">
+                                {user?.email?.charAt(0).toUpperCase() || 'U'}
+                            </div>
+                            <div className="overflow-hidden">
+                                <p className="font-bold text-sm truncate">{user?.email}</p>
+                                <p className="text-xs text-slate-500 font-bold uppercase tracking-widest">
+                                    {isSuperAdmin ? t('super_admin') :
+                                        isAdmin ? t('admin') :
+                                            isFarmer ? t('farmer') :
+                                                isOwner ? t('machinery_owner') :
+                                                    isWorker ? t('farm_worker') : 'User'}
+                                </p>
+                            </div>
+                        </div>
+                        <button
+                            onClick={logout}
+                            className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-red-400 hover:bg-red-400/10 transition-colors"
+                        >
+                            <LogOut size={20} />
+                            <span className="font-bold uppercase tracking-widest text-xs">{t('logout')}</span>
+                        </button>
+                    </div>
+                </div>
+            </aside>
+
+            {/* Main Content */}
+            <main className="flex-1 flex flex-col min-w-0 overflow-hidden relative">
+                {/* Top Header */}
+                <header className="h-20 bg-white border-b border-slate-200 flex items-center justify-between px-4 lg:px-8">
+                    <div className="flex items-center gap-4">
+                        <button
+                            className="lg:hidden p-2 text-slate-600 hover:bg-slate-100 rounded-lg"
+                            onClick={() => setIsSidebarOpen(true)}
+                        >
+                            <Menu size={24} />
+                        </button>
+                        <h1 className="text-2xl font-black text-slate-900 tracking-tight italic uppercase">{title}</h1>
+                    </div>
+
+                    <div className="flex items-center gap-4">
+                        <LanguageToggle />
+                        <div className="hidden md:flex relative items-center">
+                            <input
+                                type="text"
+                                placeholder="Search now..."
+                                className="bg-slate-100 border-none rounded-xl py-2 pl-10 pr-4 text-sm w-64 focus:ring-2 focus:ring-primary-500 transition-all"
+                            />
+                            <Search size={16} className="absolute left-3 text-slate-400" />
+                        </div>
+                    </div>
+                </header>
+
+                {/* Content Area */}
+                <div className="flex-1 overflow-y-auto p-4 lg:p-8 custom-scrollbar">
+                    {children}
+                </div>
+            </main>
+        </div>
+    );
+};
+
+export default DashboardShell;
