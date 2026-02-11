@@ -24,20 +24,20 @@ This project is developed using modern technologies like ASP.NET Core, Spring Bo
 
 🛠️ Tech Stack
 
-Frontend
-React.js
-React-i18next (Multi-language Support)
+Frontend-
+React.js,
+React-i18next (Multi-language Support),
 Bootstrap / Tailwind CSS
 
-Backend
+Backend-
 ASP.NET Core Web API
 
-Spring Boot REST API
+Spring Boot REST API-
 JWT Authentication
 
-Database
+Database-
 MySQL
 
-Tools & Services
-Razorpay Payment Gateway
+Tools & Services-
+Razorpay Payment Gateway,
 Git & GitHub for Version Control
