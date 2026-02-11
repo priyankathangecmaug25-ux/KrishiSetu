@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- Auth Messages -->
+  <data name="LoginSuccess" xml:space="preserve">
+    <value>लॉगिन सफल रहा</value>
+  </data>
+  <data name="LoginFailed" xml:space="preserve">
+    <value>अमान्य ईमेल या पासवर्ड</value>
+  </data>
+  <data name="RegisterSuccess" xml:space="preserve">
+    <value>पंजीकरण सफल। कृपया प्रशासक की मंजूरी का इंतज़ार करें।</value>
+  </data>
+  <data name="RegisterFailed" xml:space="preserve">
+    <value>पंजीकरण विफल। कृपया दोबारा कोशिश करें।</value>
+  </data>
+  <data name="UserAlreadyExists" xml:space="preserve">
+    <value>ईमेल पहले से पंजीकृत है</value>
+  </data>
+  
+  <!-- Machinery Messages -->
+  <data name="MachineryNotFound" xml:space="preserve">
+    <value>मशीनरी नहीं मिली</value>
+  </data>
+  <data name="MachineryAdded" xml:space="preserve">
+    <value>मशीनरी सफलतापूर्वक जोड़ी गई</value>
+  </data>
+  <data name="MachineryUpdated" xml:space="preserve">
+    <value>मशीनरी सफलतापूर्वक अपडेट की गई</value>
+  </data>
+  <data name="MachineryDeleted" xml:space="preserve">
+    <value>मशीनरी सफलतापूर्वक हटाई गई</value>
+  </data>
+  
+  <!-- Booking Messages -->
+  <data name="BookingNotFound" xml:space="preserve">
+    <value>बुकिंग नहीं मिली</value>
+  </data>
+  <data name="BookingCreated" xml:space="preserve">
+    <value>बुकिंग सफलतापूर्वक बनाई गई</value>
+  </data>
+  <data name="BookingConfirmed" xml:space="preserve">
+    <value>बुकिंग की पुष्टि की गई</value>
+  </data>
+  <data name="BookingCancelled" xml:space="preserve">
+    <value>बुकिंग रद्द की गई</value>
+  </data>
+  <data name="MachineryNotAvailable" xml:space="preserve">
+    <value>मशीनरी चयनित तारीखों के लिए उपलब्ध नहीं है</value>
+  </data>
+  
+  <!-- Worker Messages -->
+  <data name="WorkerNotFound" xml:space="preserve">
+    <value>कार्यकर्ता नहीं मिला</value>
+  </data>
+  <data name="WorkerProfileCreated" xml:space="preserve">
+    <value>कार्यकर्ता प्रोफाइल सफलतापूर्वक बनाया गया</value>
+  </data>
+  <data name="WorkerProfileUpdated" xml:space="preserve">
+    <value>कार्यकर्ता प्रोफाइल सफलतापूर्वक अपडेट किया गया</value>
+  </data>
+  
+  <!-- Payment Messages -->
+  <data name="PaymentSuccessful" xml:space="preserve">
+    <value>भुगतान सफलतापूर्वक संसाधित किया गया</value>
+  </data>
+  <data name="PaymentFailed" xml:space="preserve">
+    <value>भुगतान विफल। कृपया दोबारा कोशिश करें।</value>
+  </data>
+  
+  <!-- Admin Messages -->
+  <data name="Unauthorized" xml:space="preserve">
+    <value>आप इस कार्य को करने के लिए अधिकृत नहीं हैं</value>
+  </data>
+  <data name="UserApproved" xml:space="preserve">
+    <value>उपयोगकर्ता सफलतापूर्वक अनुमोदित</value>
+  </data>
+  <data name="UserRejected" xml:space="preserve">
+    <value>उपयोगकर्ता अस्वीकार किया गया</value>
+  </data>
+  
+  <!-- Generic Messages -->
+  <data name="OperationSuccess" xml:space="preserve">
+    <value>ऑपरेशन सफलतापूर्वक पूर्ण किया गया</value>
+  </data>
+  <data name="OperationFailed" xml:space="preserve">
+    <value>ऑपरेशन विफल। कृपया दोबारा कोशिश करें।</value>
+  </data>
+  <data name="InvalidInput" xml:space="preserve">
+    <value>अमान्य इनपुट प्रदान किया गया</value>
+  </data>
+  <data name="ServerError" xml:space="preserve">
+    <value>सर्वर पर एक त्रुटि हुई। कृपया बाद में दोबारा कोशिश करें।</value>
+  </data>
+</root>

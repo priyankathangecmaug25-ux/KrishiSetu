@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- Auth Messages -->
+  <data name="LoginSuccess" xml:space="preserve">
+    <value>Login successful</value>
+  </data>
+  <data name="LoginFailed" xml:space="preserve">
+    <value>Invalid email or password</value>
+  </data>
+  <data name="RegisterSuccess" xml:space="preserve">
+    <value>Registration successful. Please wait for admin approval.</value>
+  </data>
+  <data name="RegisterFailed" xml:space="preserve">
+    <value>Registration failed. Please try again.</value>
+  </data>
+  <data name="UserAlreadyExists" xml:space="preserve">
+    <value>Email already registered</value>
+  </data>
+  
+  <!-- Machinery Messages -->
+  <data name="MachineryNotFound" xml:space="preserve">
+    <value>Machinery not found</value>
+  </data>
+  <data name="MachineryAdded" xml:space="preserve">
+    <value>Machinery added successfully</value>
+  </data>
+  <data name="MachineryUpdated" xml:space="preserve">
+    <value>Machinery updated successfully</value>
+  </data>
+  <data name="MachineryDeleted" xml:space="preserve">
+    <value>Machinery deleted successfully</value>
+  </data>
+  
+  <!-- Booking Messages -->
+  <data name="BookingNotFound" xml:space="preserve">
+    <value>Booking not found</value>
+  </data>
+  <data name="BookingCreated" xml:space="preserve">
+    <value>Booking created successfully</value>
+  </data>
+  <data name="BookingConfirmed" xml:space="preserve">
+    <value>Booking confirmed</value>
+  </data>
+  <data name="BookingCancelled" xml:space="preserve">
+    <value>Booking cancelled</value>
+  </data>
+  <data name="MachineryNotAvailable" xml:space="preserve">
+    <value>Machinery is not available for selected dates</value>
+  </data>
+  
+  <!-- Worker Messages -->
+  <data name="WorkerNotFound" xml:space="preserve">
+    <value>Worker not found</value>
+  </data>
+  <data name="WorkerProfileCreated" xml:space="preserve">
+    <value>Worker profile created successfully</value>
+  </data>
+  <data name="WorkerProfileUpdated" xml:space="preserve">
+    <value>Worker profile updated successfully</value>
+  </data>
+  
+  <!-- Payment Messages -->
+  <data name="PaymentSuccessful" xml:space="preserve">
+    <value>Payment processed successfully</value>
+  </data>
+  <data name="PaymentFailed" xml:space="preserve">
+    <value>Payment failed. Please try again.</value>
+  </data>
+  
+  <!-- Admin Messages -->
+  <data name="Unauthorized" xml:space="preserve">
+    <value>You are not authorized to perform this action</value>
+  </data>
+  <data name="UserApproved" xml:space="preserve">
+    <value>User approved successfully</value>
+  </data>
+  <data name="UserRejected" xml:space="preserve">
+    <value>User rejected</value>
+  </data>
+  
+  <!-- Generic Messages -->
+  <data name="OperationSuccess" xml:space="preserve">
+    <value>Operation completed successfully</value>
+  </data>
+  <data name="OperationFailed" xml:space="preserve">
+    <value>Operation failed. Please try again.</value>
+  </data>
+  <data name="InvalidInput" xml:space="preserve">
+    <value>Invalid input provided</value>
+  </data>
+  <data name="ServerError" xml:space="preserve">
+    <value>An error occurred on the server. Please try again later.</value>
+  </data>
+</root>
